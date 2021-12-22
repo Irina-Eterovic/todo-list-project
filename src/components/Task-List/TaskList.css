@@ -1,0 +1,15 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 45px;
+}
+.field {
+  width: 20%;
+  padding: auto;
+}
+.action {
+  border: none;
+  cursor: pointer;
+}
