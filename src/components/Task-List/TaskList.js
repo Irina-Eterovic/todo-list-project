@@ -1,11 +1,13 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { setTasks } from "../../redux/actions/taskActions";
 import "./TaskList.css";
 import { useSelector, useDispatch } from "react-redux";
+import { ClipLoader } from "react-spinners";
 
 export default function TaskList() {
+  const [loading, setLoading] = useState(true);
   const taskList = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -17,21 +19,27 @@ export default function TaskList() {
       });
 
     dispatch(setTasks(response.data.allTasks));
+    setLoading(false);
   };
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  function deleteTask(taskId) {
-    axios
+  async function deleteTask(taskId) {
+    setLoading(true);
+    const resp = await axios
       .delete("https://todo-task-web.herokuapp.com/task/" + taskId)
       .catch((err) => {
         console.log(err);
       });
+    fetchTasks();
   }
-  return (
+  return loading ? (
+    <ClipLoader loading={loading} size={100} />
+  ) : (
     <div>
-      <h1>Tasks</h1>
+      <h3>List of available tasks</h3>
       {taskList.allTasks.tasks.map((task) => {
         return (
           <div className="row" key={task.taskId}>
