@@ -1,7 +1,7 @@
 import TaskList from "./components/Task-List/TaskList";
 
 import "./App.css";
-import EditTask from "./components/EditTask/EditTask";
+import EditTask from "./components/Edit-Task/EditTask";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 function App() {
   return (
