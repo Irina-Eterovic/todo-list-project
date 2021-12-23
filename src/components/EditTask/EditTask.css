@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.titleInput {
+  width: 300px;
+}
+.submitButton {
+  margin: 2rem;
+  width: 200px;
+  height: 30px;
+}
