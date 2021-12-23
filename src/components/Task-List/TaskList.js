@@ -5,6 +5,7 @@ import { setTasks } from "../../redux/actions/taskActions";
 import "./TaskList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 
 export default function TaskList() {
   const [loading, setLoading] = useState(true);
@@ -35,6 +36,19 @@ export default function TaskList() {
       });
     fetchTasks();
   }
+
+  async function completeTask(e, taskId) {
+    const res = await axios
+      .patch(
+        " https://todo-task-web.herokuapp.com/task/" + taskId + "/complete",
+        {
+          completed: e.target.checked,
+        }
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return loading ? (
     <ClipLoader loading={loading} size={100} />
   ) : (
@@ -44,12 +58,19 @@ export default function TaskList() {
         return (
           <div className="row" key={task.taskId}>
             <span className="field">
-              <input type="checkbox" checked={task.completed} /> Completed
+              <input
+                type="checkbox"
+                defaultChecked={task.completed}
+                onChange={(e) => completeTask(e, task.taskId)}
+              />
+              Completed
             </span>
             <span className="field">{task.title}</span>
             <span className="field">{task.dueDate}</span>
             <span className="field">{task.createdDate}</span>
-            <button className="field action"> edit</button>
+            <button className="field action">
+              <Link to={`/edit/${task.taskId}`}>edit</Link>
+            </button>
             <button
               className="field action"
               onClick={() => deleteTask(task.taskId)}
