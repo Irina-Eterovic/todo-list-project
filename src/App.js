@@ -1,14 +1,13 @@
-import TaskList from "./components/Task-List/TaskList";
-
 import "./App.css";
 import EditTask from "./components/Edit-Task/EditTask";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./components/Home-Page/Home";
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" element={<TaskList />} />
+          <Route exact path="/" element={<Home />} />
           <Route exact path="/edit/:taskId" element={<EditTask />} />
         </Routes>
       </Router>
