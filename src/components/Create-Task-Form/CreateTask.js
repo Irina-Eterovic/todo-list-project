@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import "./CreateTask.css";
 
 export default function CreateTask() {
   let [formData, setFormData] = useState({
@@ -41,17 +42,22 @@ export default function CreateTask() {
   return (
     <div>
       <h3>Create new task</h3>
-      <form onSubmit={saveTask}>
-        <div>
+      <form onSubmit={saveTask} className="form">
+        <div className="field">
           <label>Title: </label>
           <input type="text" name="title" onChange={handleChange} />
         </div>
-        <div>
+        <div className="field">
           <label>Due date: </label>
-          <input type="datetime-local" name="dueDate" onChange={handleChange} />
+          <input
+            type="datetime-local"
+            name="dueDate"
+            onChange={handleChange}
+            min={new Date().toISOString().slice(0, -8)}
+          />
         </div>
-        <div>
-          <input type="submit" />
+        <div className="field">
+          <input type="submit" className="button" />
         </div>
       </form>
     </div>
