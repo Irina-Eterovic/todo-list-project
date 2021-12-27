@@ -6,6 +6,7 @@ import "./TaskList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import getPrettierDate from "../../utils/formatDate";
 
 export default function TaskList() {
   const [loading, setLoading] = useState(true);
@@ -65,9 +66,11 @@ export default function TaskList() {
               />
               Completed
             </span>
-            <span className="field">{task.title}</span>
-            <span className="field">{task.dueDate}</span>
-            <span className="field">{task.createdDate}</span>
+            <span className="field">
+              <Link to={`/task/${task.taskId}`}>{task.title}</Link>
+            </span>
+            <span className="field">{getPrettierDate(task.dueDate)}</span>
+            <span className="field">{getPrettierDate(task.createdDate)}</span>
             <button className="field action">
               <Link to={`/edit/${task.taskId}`}>edit</Link>
             </button>
