@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import getPrettierDate from "../../utils/formatDate";
+import { Table } from "reactstrap";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 
 export default function TaskList() {
   const [loading, setLoading] = useState(true);
@@ -53,36 +55,57 @@ export default function TaskList() {
   return loading ? (
     <ClipLoader loading={loading} size={100} />
   ) : (
-    <div>
+    <div className="m-4">
       <h3>List of available tasks</h3>
-      {taskList.allTasks.tasks.map((task) => {
-        return (
-          <div className="row" key={task.taskId}>
-            <span className="field">
-              <input
-                type="checkbox"
-                defaultChecked={task.completed}
-                onChange={(e) => completeTask(e, task.taskId)}
-              />
-              Completed
-            </span>
-            <span className="field">
-              <Link to={`/task/${task.taskId}`}>{task.title}</Link>
-            </span>
-            <span className="field">{getPrettierDate(task.dueDate)}</span>
-            <span className="field">{getPrettierDate(task.createdDate)}</span>
-            <button className="field action">
-              <Link to={`/edit/${task.taskId}`}>edit</Link>
-            </button>
-            <button
-              className="field action"
-              onClick={() => deleteTask(task.taskId)}
-            >
-              del
-            </button>
-          </div>
-        );
-      })}
+      <Table striped>
+        <thead>
+          <tr>
+            <th>Completed</th>
+            <th>Title</th>
+            <th>Due Date</th>
+            <th>Created Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {taskList.allTasks.tasks.map((task) => {
+            return (
+              <tr key={task.taskId}>
+                <td className="field">
+                  <input
+                    type="checkbox"
+                    defaultChecked={task.completed}
+                    onChange={(e) => completeTask(e, task.taskId)}
+                  />
+                </td>
+                <td className="field">
+                  <Link to={`/task/${task.taskId}`} className="no-style">
+                    {task.title}
+                  </Link>
+                </td>
+                <td className="field">{getPrettierDate(task.dueDate)}</td>
+                <td className="field">{getPrettierDate(task.createdDate)}</td>
+                <td>
+                  <button className="field action">
+                    <Link to={`/edit/${task.taskId}`} className="no-style">
+                      <FaEdit />
+                    </Link>
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="field action"
+                    onClick={() => deleteTask(task.taskId)}
+                  >
+                    <FaTrashAlt />
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
     </div>
   );
 }

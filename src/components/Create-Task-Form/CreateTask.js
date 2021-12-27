@@ -1,6 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
 import "./CreateTask.css";
+import {
+  Card,
+  Button,
+  CardTitle,
+  CardBody,
+  Form,
+  Label,
+  Input,
+} from "reactstrap";
 
 export default function CreateTask() {
   let [formData, setFormData] = useState({
@@ -40,26 +49,34 @@ export default function CreateTask() {
   };
 
   return (
-    <div>
-      <h3>Create new task</h3>
-      <form onSubmit={saveTask} className="form">
-        <div className="field">
-          <label>Title: </label>
-          <input type="text" name="title" onChange={handleChange} />
-        </div>
-        <div className="field">
-          <label>Due date: </label>
-          <input
+    <Card color="secondary" outline body className="m-4 text-center">
+      <CardTitle tag="h5">Create new task</CardTitle>
+      <CardBody>
+        <Form onSubmit={saveTask}>
+          <Label>Title: </Label>
+          <Input
+            type="text"
+            name="title"
+            onChange={handleChange}
+            className="w-25 mx-auto"
+            required
+          />
+
+          <Label>Due date: </Label>
+          <Input
             type="datetime-local"
             name="dueDate"
             onChange={handleChange}
             min={new Date().toISOString().slice(0, -8)}
+            className="w-25 mx-auto"
+            required
           />
-        </div>
-        <div className="field">
-          <input type="submit" className="button" />
-        </div>
-      </form>
-    </div>
+
+          <Button type="submit" className="mt-2">
+            Create
+          </Button>
+        </Form>
+      </CardBody>
+    </Card>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTask } from "../../hooks/useTask";
 import "./EditTask.css";
 import axios from "axios";
@@ -9,6 +9,7 @@ export default function EditTask() {
   const [newTitle, setNewTitle] = useState("");
   let navigate = useNavigate();
   let { taskId } = useParams();
+
   const task = useTask(taskId);
   const handleChange = (event) => {
     setNewTitle(event.target.value);
@@ -16,21 +17,14 @@ export default function EditTask() {
 
   const saveNewTitle = async (event) => {
     event.preventDefault();
-    if (newTitle !== "") {
-      const res = await axios
-        .patch(
-          " https://todo-task-web.herokuapp.com/task/" + taskId + "/title",
-          {
-            title: newTitle,
-          }
-        )
-        .catch((err) => {
-          console.log(err);
-        });
-      navigate("/");
-    } else {
-      alert("Please write a new title");
-    }
+    const res = await axios
+      .patch(" https://todo-task-web.herokuapp.com/task/" + taskId + "/title", {
+        title: newTitle,
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    navigate("/");
   };
 
   return (
@@ -45,6 +39,7 @@ export default function EditTask() {
           name="newTitle"
           onChange={handleChange}
           className="titleInput"
+          required
         />
         <input type="submit" className="submitButton" />
       </form>
