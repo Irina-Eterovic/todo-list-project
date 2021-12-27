@@ -3,10 +3,11 @@ import { useParams } from "react-router";
 import axios from "axios";
 import { useTask } from "../../hooks/useTask";
 import getPrettierDate from "../../utils/formatDate";
+import { Spinner } from "reactstrap";
 
 export default function TaskDetail() {
-  let { taskId } = useParams();
-  const task = useTask(taskId);
+  const { taskId } = useParams();
+  let task = useTask(taskId);
   async function completeTask(e) {
     const res = await axios
       .patch(
@@ -20,12 +21,16 @@ export default function TaskDetail() {
       });
   }
   return (
-    <div>
+    <div className="m-4">
       <h3>Task details</h3>
       <p>Title: {task.title}</p>
       <p>Due date: {getPrettierDate(task.dueDate)}</p>
       <p>Created date:{getPrettierDate(task.createdDate)}</p>
-      <input type="checkbox" onChange={(e) => completeTask(e)} />
+      <input
+        type="checkbox"
+        defaultChecked={task.completed}
+        onChange={(e) => completeTask(e)}
+      />
       Completed
     </div>
   );
