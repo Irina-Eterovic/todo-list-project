@@ -17,13 +17,13 @@ export default function EditTask() {
 
   const saveNewTitle = async (event) => {
     event.preventDefault();
-    const res = await axios
-      .patch(" https://todo-task-web.herokuapp.com/task/" + taskId + "/title", {
+    const res = await axios.patch(
+      " https://todo-task-web.herokuapp.com/task/" + taskId + "/title",
+      {
         title: newTitle,
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      }
+    );
+
     navigate("/");
   };
 
