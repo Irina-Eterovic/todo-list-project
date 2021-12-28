@@ -16,11 +16,9 @@ export default function TaskList() {
   const dispatch = useDispatch();
 
   const fetchTasks = async () => {
-    const response = await axios
-      .get(" https://todo-task-web.herokuapp.com/task/list")
-      .catch((err) => {
-        console.log(err);
-      });
+    const response = await axios.get(
+      " https://todo-task-web.herokuapp.com/task/list"
+    );
 
     dispatch(setTasks(response.data.allTasks));
     setLoading(false);
@@ -32,25 +30,20 @@ export default function TaskList() {
 
   async function deleteTask(taskId) {
     setLoading(true);
-    const resp = await axios
-      .delete("https://todo-task-web.herokuapp.com/task/" + taskId)
-      .catch((err) => {
-        console.log(err);
-      });
+    const resp = await axios.delete(
+      "https://todo-task-web.herokuapp.com/task/" + taskId
+    );
+
     fetchTasks();
   }
 
   async function completeTask(e, taskId) {
-    const res = await axios
-      .patch(
-        " https://todo-task-web.herokuapp.com/task/" + taskId + "/complete",
-        {
-          completed: e.target.checked,
-        }
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    const res = await axios.patch(
+      " https://todo-task-web.herokuapp.com/task/" + taskId + "/complete",
+      {
+        completed: e.target.checked,
+      }
+    );
   }
   return loading ? (
     <ClipLoader loading={loading} size={100} />

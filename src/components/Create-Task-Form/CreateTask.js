@@ -40,12 +40,11 @@ export default function CreateTask() {
       dueDate: formattedDueDate,
       createdDate: createdTime,
     };
-    console.log(requestBody);
-    const response = await axios
-      .post(" https://todo-task-web.herokuapp.com/task/create", requestBody)
-      .catch(function (error) {
-        console.log(error);
-      });
+
+    const response = await axios.post(
+      " https://todo-task-web.herokuapp.com/task/create",
+      requestBody
+    );
   };
 
   return (

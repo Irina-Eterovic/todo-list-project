@@ -9,16 +9,12 @@ export default function TaskDetail() {
   const { taskId } = useParams();
   let task = useTask(taskId);
   async function completeTask(e) {
-    const res = await axios
-      .patch(
-        " https://todo-task-web.herokuapp.com/task/" + taskId + "/complete",
-        {
-          completed: e.target.checked,
-        }
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    const res = await axios.patch(
+      " https://todo-task-web.herokuapp.com/task/" + taskId + "/complete",
+      {
+        completed: e.target.checked,
+      }
+    );
   }
   return (
     <div className="m-4">
