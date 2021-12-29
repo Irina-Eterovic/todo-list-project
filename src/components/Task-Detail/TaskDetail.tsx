@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { useTask } from "../../hooks/useTask";
 import getPrettierDate from "../../utils/formatDate";
-import { Spinner } from "reactstrap";
 
 export default function TaskDetail() {
   const { taskId } = useParams();
   let task = useTask(taskId);
-  async function completeTask(e) {
-    const res = await axios.patch(
+  let checked = task.completed;
+  async function completeTask(e: any) {
+    await axios.patch(
       " https://todo-task-web.herokuapp.com/task/" + taskId + "/complete",
       {
         completed: e.target.checked,
       }
     );
   }
+  console.log(task.completed);
   return (
     <div className="m-4">
       <h3>Task details</h3>
@@ -24,7 +24,7 @@ export default function TaskDetail() {
       <p>Created date:{getPrettierDate(task.createdDate)}</p>
       <input
         type="checkbox"
-        defaultChecked={task.completed}
+        defaultChecked={checked}
         onChange={(e) => completeTask(e)}
       />
       Completed

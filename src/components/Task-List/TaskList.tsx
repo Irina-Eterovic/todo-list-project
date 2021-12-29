@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { setTasks } from "../../redux/actions/taskActions";
@@ -9,10 +8,11 @@ import { Link } from "react-router-dom";
 import getPrettierDate from "../../utils/formatDate";
 import { Table } from "reactstrap";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { RootState } from "../../redux/reducers/rootReducer";
 
 export default function TaskList() {
   const [loading, setLoading] = useState(true);
-  const taskList = useSelector((state) => state);
+  const taskList = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
   const fetchTasks = async () => {
@@ -28,17 +28,15 @@ export default function TaskList() {
     fetchTasks();
   }, []);
 
-  async function deleteTask(taskId) {
+  async function deleteTask(taskId: String) {
     setLoading(true);
-    const resp = await axios.delete(
-      "https://todo-task-web.herokuapp.com/task/" + taskId
-    );
+    await axios.delete("https://todo-task-web.herokuapp.com/task/" + taskId);
 
     fetchTasks();
   }
 
-  async function completeTask(e, taskId) {
-    const res = await axios.patch(
+  async function completeTask(e: any, taskId: String) {
+    await axios.patch(
       " https://todo-task-web.herokuapp.com/task/" + taskId + "/complete",
       {
         completed: e.target.checked,
@@ -62,7 +60,7 @@ export default function TaskList() {
           </tr>
         </thead>
         <tbody>
-          {taskList.allTasks.tasks.map((task) => {
+          {taskList.allTasks.tasks.map((task: any) => {
             return (
               <tr key={task.taskId}>
                 <td className="field">
