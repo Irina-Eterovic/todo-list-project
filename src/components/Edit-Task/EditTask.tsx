@@ -1,6 +1,5 @@
-import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTask } from "../../hooks/useTask";
 import "./EditTask.css";
 import axios from "axios";
@@ -11,13 +10,13 @@ export default function EditTask() {
   let { taskId } = useParams();
 
   const task = useTask(taskId);
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     setNewTitle(event.target.value);
   };
 
-  const saveNewTitle = async (event) => {
+  const saveNewTitle = async (event: any) => {
     event.preventDefault();
-    const res = await axios.patch(
+    await axios.patch(
       " https://todo-task-web.herokuapp.com/task/" + taskId + "/title",
       {
         title: newTitle,

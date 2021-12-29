@@ -18,9 +18,8 @@ export default function CreateTask() {
     createdDate: "",
     completed: false,
   });
-  let today = new Date().toISOString().split("T")[0];
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -31,7 +30,7 @@ export default function CreateTask() {
     return new Date().toISOString();
   };
 
-  const saveTask = async (event) => {
+  const saveTask = async () => {
     let createdTime = getCreationTime();
     let formattedDueDate = new Date(formData.dueDate).toISOString();
     let requestBody = {
@@ -41,7 +40,7 @@ export default function CreateTask() {
       createdDate: createdTime,
     };
 
-    const response = await axios.post(
+    await axios.post(
       " https://todo-task-web.herokuapp.com/task/create",
       requestBody
     );

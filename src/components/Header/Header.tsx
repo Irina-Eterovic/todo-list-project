@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Navbar, NavItem } from "reactstrap";
+import { Navbar } from "reactstrap";
 import "./Header.css";
 
 export default function Header() {
