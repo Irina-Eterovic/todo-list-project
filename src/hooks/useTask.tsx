@@ -5,7 +5,7 @@ import { RootState } from "../redux/reducers/rootReducer";
 import { setOpenTask } from "../redux/actions/taskActions";
 
 export function useTask(taskId: string) {
-  const openTask = useSelector((state: RootState) => state);
+  const openTask = useSelector((state: RootState) => state.task);
   const dispatch = useDispatch();
 
   const loadTask = async () => {
@@ -18,5 +18,5 @@ export function useTask(taskId: string) {
     loadTask();
   }, []);
 
-  return openTask.task.openTask;
+  return openTask.openTask;
 }

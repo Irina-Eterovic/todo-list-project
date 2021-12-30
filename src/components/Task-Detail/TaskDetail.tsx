@@ -15,7 +15,6 @@ export default function TaskDetail() {
       }
     );
   }
-  console.log(task?.completed);
   return (
     <div className="m-4">
       <h3>Task details</h3>
