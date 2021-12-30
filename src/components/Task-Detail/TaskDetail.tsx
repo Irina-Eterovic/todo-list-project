@@ -5,8 +5,8 @@ import getPrettierDate from "../../utils/formatDate";
 
 export default function TaskDetail() {
   const { taskId } = useParams();
-  let task = useTask(taskId);
-  let checked = task.completed;
+  let task = useTask(taskId!);
+  let checked = task?.completed;
   async function completeTask(e: any) {
     await axios.patch(
       " https://todo-task-web.herokuapp.com/task/" + taskId + "/complete",
@@ -15,13 +15,13 @@ export default function TaskDetail() {
       }
     );
   }
-  console.log(task.completed);
+  console.log(task?.completed);
   return (
     <div className="m-4">
       <h3>Task details</h3>
-      <p>Title: {task.title}</p>
-      <p>Due date: {getPrettierDate(task.dueDate)}</p>
-      <p>Created date:{getPrettierDate(task.createdDate)}</p>
+      <p>Title: {task?.title}</p>
+      <p>Due date: {getPrettierDate(task?.dueDate)}</p>
+      <p>Created date:{getPrettierDate(task?.createdDate)}</p>
       <input
         type="checkbox"
         defaultChecked={checked}

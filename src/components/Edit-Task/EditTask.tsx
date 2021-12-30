@@ -9,7 +9,7 @@ export default function EditTask() {
   let navigate = useNavigate();
   let { taskId } = useParams();
 
-  const task = useTask(taskId);
+  const task = useTask(taskId!);
   const handleChange = (event: any) => {
     setNewTitle(event.target.value);
   };
@@ -30,7 +30,7 @@ export default function EditTask() {
     <div>
       <h2>Edit title task</h2>
       <form onSubmit={saveNewTitle} className="form">
-        <p>Current title: {task.title}</p>
+        <p>Current title: {task?.title}</p>
         <label>New Title</label>
         <input
           type="text"

@@ -1,8 +1,9 @@
+import { Task } from "src/models/Task";
 import { ActionTypes } from "../constants/action-types";
 
-export const setTasks = (tasks: any) => {
+export const setOpenTask = (task: Task) => {
   return {
-    type: ActionTypes.SET_TASKS,
-    payload: tasks,
+    type: ActionTypes.SET_OPEN_TASK,
+    payload: task,
   };
 };

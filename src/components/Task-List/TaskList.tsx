@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { setTasks } from "../../redux/actions/taskActions";
+import { setTasks } from "../../redux/actions/taskListActions";
 import "./TaskList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
