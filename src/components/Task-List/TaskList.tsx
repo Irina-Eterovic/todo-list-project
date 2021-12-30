@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { setTasks } from "../../redux/actions/taskActions";
+import { setTasks } from "../../redux/actions/taskListActions";
 import "./TaskList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
@@ -12,7 +12,7 @@ import { RootState } from "../../redux/reducers/rootReducer";
 
 export default function TaskList() {
   const [loading, setLoading] = useState(true);
-  const taskList = useSelector((state: RootState) => state);
+  const taskList = useSelector((state: RootState) => state.allTasks);
   const dispatch = useDispatch();
 
   const fetchTasks = async () => {
@@ -60,7 +60,7 @@ export default function TaskList() {
           </tr>
         </thead>
         <tbody>
-          {taskList.allTasks.tasks.map((task: any) => {
+          {taskList.tasks.map((task: any) => {
             return (
               <tr key={task.taskId}>
                 <td className="field">
