@@ -50,13 +50,14 @@ export default function CreateTask() {
     <Card color="secondary" outline body className="m-4 text-center">
       <CardTitle tag="h5">Create new task</CardTitle>
       <CardBody>
-        <Form onSubmit={saveTask}>
+        <Form onSubmit={saveTask} data-testid="form">
           <Label>Title: </Label>
           <Input
             type="text"
             name="title"
             onChange={handleChange}
             className="w-25 mx-auto"
+            placeholder="Write task title"
             required
           />
 
@@ -64,6 +65,7 @@ export default function CreateTask() {
           <Input
             type="datetime-local"
             name="dueDate"
+            id="dueDate"
             onChange={handleChange}
             min={new Date().toISOString().slice(0, -8)}
             className="w-25 mx-auto"

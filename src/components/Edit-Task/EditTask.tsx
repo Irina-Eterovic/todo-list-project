@@ -29,7 +29,7 @@ export default function EditTask() {
   return (
     <div>
       <h2>Edit title task</h2>
-      <form onSubmit={saveNewTitle} className="form">
+      <form onSubmit={saveNewTitle} className="form" data-testid="edit-form">
         <p>Current title: {task?.title}</p>
         <label>New Title</label>
         <input
